@@ -436,3 +436,67 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
+# .NET Core build folders
+bin/
+obj/
+
+# Visual Studio files
+.vs/
+*.user
+*.userosscache
+*.suo
+*.userprefs
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+build/
+bld/
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+msbuild.log
+msbuild.err
+msbuild.wrn
+
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
+# Rider
+.idea/
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# NuGet
+*.nupkg
+*.snupkg
+**/packages/*
+!**/packages/build/
+*.nuget.props
+*.nuget.targets
+
+# SQL Server files
+*.mdf
+*.ldf
+*.ndf
+
+# Environment files
+*.env
+appsettings.*.json
+!appsettings.json
+!appsettings.Development.json
+
+# Logs
+logs/
+*.log
