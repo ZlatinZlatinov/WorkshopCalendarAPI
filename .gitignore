@@ -32,6 +32,7 @@ bld/
 [Oo]ut/
 [Ll]og/
 [Ll]ogs/
+.mdc
 
 # Build results on 'Bin' directories
 **/[Bb]in/*
@@ -138,6 +139,10 @@ ipch/
 # TFS 2012 Local Workspace
 $tf/
 
+## Configuration transforms
+appsettings.*.json
+!appsettings.Development.json
+
 # Guidance Automation Toolkit
 *.gpState
 
@@ -206,6 +211,15 @@ publish/
 # checkin your Azure Web App publish settings, but sensitive information contained
 # in these scripts will be unencrypted
 PublishScripts/
+
+## OS generated
+.DS_Store
+Thumbs.db
+
+## MCP SDK generated files (hypothetical)
+.mcp/
+*.mcp.cache
+mcp-debug.log
 
 # NuGet Packages
 *.nupkg
