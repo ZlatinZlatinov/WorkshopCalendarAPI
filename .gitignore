@@ -403,6 +403,13 @@ healthchecksdb
 # Backup folder for Package Reference Convert tool in Visual Studio 2017
 MigrationBackup/
 
+## ASP.NET Secrets (if using Secret Manager)
+**/secrets.json
+
+## Entity Framework
+Migrations/*Snapshot.cs
+Migrations/*Designer.cs
+
 # Ionide (cross platform F# VS Code tools) working folder
 **/.ionide/
 
