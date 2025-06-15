@@ -22,7 +22,7 @@ A .NET 9 ASP.NET Core Web API for managing personal calendars with support for m
 1. Clone the repository:
 ```bash
 git clone <repository-url>
-cd WorkshopCalendarAPI
+cd CalendarAPI
 ```
 
 2. Update the connection string in `appsettings.json` to point to your SQL Server instance:
@@ -134,17 +134,56 @@ GET /api/v1/events/free-slots?startDate=2024-03-20T09:00:00Z&endDate=2024-03-20T
 ## Development
 
 ### Project Structure
-- `Controllers/` - API endpoints
-- `Models/` - Data models
-- `Services/` - Business logic
-- `Data/` - Database context and migrations
+```
+WorkshopCalendarAPI/
+├── CalendarAPI/                    # Main API project
+│   ├── Controllers/               # API endpoints
+│   │   ├── AuthController.cs      # Authentication endpoints
+│   │   ├── EventsController.cs    # Event management endpoints
+│   │   └── UsersController.cs     # User management endpoints
+│   ├── Data/                      # Data access layer
+│   │   └── ApplicationDbContext.cs # Database context
+│   ├── Migrations/                # Database migrations
+│   │   ├── 20250614170553_InitialCreate.cs
+│   │   └── ApplicationDbContextModelSnapshot.cs
+│   ├── Models/                    # Data models
+│   │   ├── AuthModels.cs         # Authentication models
+│   │   ├── Event.cs              # Event model
+│   │   ├── EventParticipant.cs   # Event participant model
+│   │   └── User.cs               # User model
+│   ├── Services/                  # Business logic
+│   │   ├── AuthService.cs        # Authentication service
+│   │   └── FreeSlotsService.cs   # Free slots calculation service
+│   ├── Program.cs                 # Application entry point
+│   └── appsettings.json          # Application configuration
+│
+└── CalendarAPI.Tests/             # Test project
+    ├── AuthServiceTests.cs       # Authentication service tests
+    ├── EventsControllerTests.cs  # Event controller tests
+    ├── FreeSlotsServiceTests.cs  # Free slots service tests
+    └── UsersControllerTests.cs   # User controller tests
+```
 
-### Adding New Features
-1. Create necessary models
-2. Add migrations if needed
-3. Implement business logic in services
-4. Create controllers for API endpoints
-5. Update documentation
+### Key Components
+
+#### Controllers
+- `AuthController`: Handles user registration and login
+- `EventsController`: Manages calendar events and free slots
+- `UsersController`: Handles user management
+
+#### Services
+- `AuthService`: Implements authentication logic and JWT token generation
+- `FreeSlotsService`: Calculates available time slots for multiple users
+
+#### Models
+- `User`: User information and authentication
+- `Event`: Calendar event details
+- `EventParticipant`: Event participation information
+- `AuthModels`: Authentication request/response models
+
+#### Data
+- `ApplicationDbContext`: Entity Framework Core database context
+- Migrations: Database schema management
 
 ## Security Considerations
 

@@ -4,10 +4,11 @@ using System.Security.Cryptography;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using WorkshopCalendarAPI.Data;
-using WorkshopCalendarAPI.Models;
+using CalendarAPI.Data;
+using CalendarAPI.Models;
+using System.ComponentModel.DataAnnotations;
 
-namespace WorkshopCalendarAPI.Services;
+namespace CalendarAPI.Services;
 
 public class AuthService
 {
@@ -22,6 +23,32 @@ public class AuthService
 
     public async Task<AuthResponse> RegisterAsync(RegisterRequest request)
     {
+        // Validate input
+        if (string.IsNullOrEmpty(request.Name))
+        {
+            return new AuthResponse { Success = false, Message = "Name is required" };
+        }
+        if (request.Name.Length < 2)
+        {
+            return new AuthResponse { Success = false, Message = "Name must be at least 2 characters" };
+        }
+        if (string.IsNullOrEmpty(request.Email))
+        {
+            return new AuthResponse { Success = false, Message = "Email is required" };
+        }
+        if (!new EmailAddressAttribute().IsValid(request.Email))
+        {
+            return new AuthResponse { Success = false, Message = "Invalid email format" };
+        }
+        if (string.IsNullOrEmpty(request.Password))
+        {
+            return new AuthResponse { Success = false, Message = "Password is required" };
+        }
+        if (request.Password.Length < 6)
+        {
+            return new AuthResponse { Success = false, Message = "Password must be at least 6 characters" };
+        }
+
         // Check if user already exists
         if (await _context.Users.AnyAsync(u => u.Email == request.Email))
         {
@@ -63,6 +90,20 @@ public class AuthService
 
     public async Task<AuthResponse> LoginAsync(LoginRequest request)
     {
+        // Validate input
+        if (string.IsNullOrEmpty(request.Email))
+        {
+            return new AuthResponse { Success = false, Message = "Email is required" };
+        }
+        if (!new EmailAddressAttribute().IsValid(request.Email))
+        {
+            return new AuthResponse { Success = false, Message = "Invalid email format" };
+        }
+        if (string.IsNullOrEmpty(request.Password))
+        {
+            return new AuthResponse { Success = false, Message = "Password is required" };
+        }
+
         var user = await _context.Users
             .FirstOrDefaultAsync(u => u.Email == request.Email);
 
@@ -84,6 +125,7 @@ public class AuthService
             };
         }
 
+        // Generate token
         var token = GenerateJwtToken(user);
 
         return new AuthResponse
@@ -123,15 +165,16 @@ public class AuthService
         return new JwtSecurityTokenHandler().WriteToken(token);
     }
 
+    private static bool VerifyPassword(string password, string passwordHash)
+    {
+        var hashedPassword = HashPassword(password);
+        return hashedPassword == passwordHash;
+    }
+
     private static string HashPassword(string password)
     {
         using var sha256 = SHA256.Create();
         var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
         return Convert.ToBase64String(hashedBytes);
-    }
-
-    private static bool VerifyPassword(string password, string hash)
-    {
-        return HashPassword(password) == hash;
     }
 } 
