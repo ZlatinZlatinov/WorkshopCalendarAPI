@@ -22,7 +22,7 @@ A .NET 9 ASP.NET Core Web API for managing personal calendars with support for m
 1. Clone the repository:
 ```bash
 git clone <repository-url>
-cd WorkshopCalendarAPI
+cd CalendarAPI
 ```
 
 2. Update the connection string in `appsettings.json` to point to your SQL Server instance:

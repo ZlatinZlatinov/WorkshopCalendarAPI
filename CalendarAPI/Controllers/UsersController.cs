@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using WorkshopCalendarAPI.Data;
-using WorkshopCalendarAPI.Models;
+using CalendarAPI.Data;
+using CalendarAPI.Models;
 
-namespace WorkshopCalendarAPI.Controllers;
+namespace CalendarAPI.Controllers;
 
 [Authorize]
 [ApiController]

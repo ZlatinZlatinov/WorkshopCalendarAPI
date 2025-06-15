@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WorkshopCalendarAPI.csproj" />
+    <ProjectReference Include="..\CalendarAPI\CalendarAPI.csproj" />
   </ItemGroup>
 
 </Project>

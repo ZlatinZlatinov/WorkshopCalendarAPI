@@ -1,6 +1,0 @@
-@WorkshopCalendarAPI_HostAddress = http://localhost:5058
-
-GET {{WorkshopCalendarAPI_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

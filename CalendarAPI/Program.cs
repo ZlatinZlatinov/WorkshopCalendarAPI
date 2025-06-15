@@ -2,8 +2,8 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using WorkshopCalendarAPI.Data;
-using WorkshopCalendarAPI.Services;
+using CalendarAPI.Data;
+using CalendarAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-using WorkshopCalendarAPI.Models;
-using WorkshopCalendarAPI.Services;
+using CalendarAPI.Models;
+using CalendarAPI.Services;
 
-namespace WorkshopCalendarAPI.Controllers;
+namespace CalendarAPI.Controllers;
 
 [ApiController]
 [Route("api/v1/[controller]")]

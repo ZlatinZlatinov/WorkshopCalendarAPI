@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace WorkshopCalendarAPI.Models;
+namespace CalendarAPI.Models;
 
 public class RegisterRequest
 {

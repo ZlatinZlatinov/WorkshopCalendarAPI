@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic; 
 using System.Linq; 
-using WorkshopCalendarAPI.Models; 
-using WorkshopCalendarAPI.Services; 
+using CalendarAPI.Models; 
+using CalendarAPI.Services; 
 using Xunit;  
 
-namespace WorkshopCalendarAPI.Tests;  
+namespace CalendarAPI.Tests;  
 
 public class FreeSlotsServiceTests 
 {     

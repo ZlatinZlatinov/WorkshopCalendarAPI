@@ -1,6 +1,6 @@
-using WorkshopCalendarAPI.Models;
+using CalendarAPI.Models;
 
-namespace WorkshopCalendarAPI.Services;
+namespace CalendarAPI.Services;
 
 public class FreeSlotsService
 {

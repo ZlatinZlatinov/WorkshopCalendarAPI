@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using WorkshopCalendarAPI.Models;
+using CalendarAPI.Models;
 
-namespace WorkshopCalendarAPI.Data;
+namespace CalendarAPI.Data;
 
 public class ApplicationDbContext : DbContext
 {

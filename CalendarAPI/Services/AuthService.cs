@@ -4,10 +4,10 @@ using System.Security.Cryptography;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using WorkshopCalendarAPI.Data;
-using WorkshopCalendarAPI.Models;
+using CalendarAPI.Data;
+using CalendarAPI.Models;
 
-namespace WorkshopCalendarAPI.Services;
+namespace CalendarAPI.Services;
 
 public class AuthService
 {
