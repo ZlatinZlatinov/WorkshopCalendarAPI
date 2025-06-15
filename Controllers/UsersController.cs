@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WorkshopCalendarAPI.Data;
@@ -5,6 +6,7 @@ using WorkshopCalendarAPI.Models;
 
 namespace WorkshopCalendarAPI.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("api/v1/[controller]")]
 public class UsersController : ControllerBase
