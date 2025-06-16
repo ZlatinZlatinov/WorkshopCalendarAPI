@@ -188,15 +188,29 @@ public class FreeSlotsServiceTests
         var duration = TimeSpan.FromHours(1);
         var participantIds = new List<int> { 1 };
 
-        // No events in this test, so pass empty list
+        var events = new List<Event>
+        {
+            new Event
+            {
+                Title = "Existing Event",
+                Description = "Test Description",
+                StartTime = startDate.AddHours(1),
+                EndTime = startDate.AddHours(2),
+                IsCancelled = false,
+                Participants = new List<EventParticipant>
+                {
+                    new EventParticipant { UserId = 1 }
+                }
+            }
+        };
         // Act
-        var result = _service.FindFreeSlots(new List<Event>(), startDate, endDate, duration, participantIds);
+        var result = _service.FindFreeSlots(events, startDate, endDate, duration, participantIds);
 
         // Assert
         var slotsList = result.ToList();
         Assert.Single(slotsList);
-        Assert.Equal(startDate.ToUniversalTime(), slotsList[0].StartTime.ToUniversalTime());
-        Assert.Equal(startDate.Add(duration).ToUniversalTime(), slotsList[0].EndTime.ToUniversalTime());
+        Assert.Equal(new DateTime(2024, 3, 1, 9, 0, 0, DateTimeKind.Utc), slotsList[0].StartTime);
+        Assert.Equal(new DateTime(2024, 3, 1, 10, 0, 0, DateTimeKind.Utc), slotsList[0].EndTime);
     }
 
     [Fact]
@@ -247,7 +261,11 @@ public class FreeSlotsServiceTests
                 Description = "Test Description 1",
                 StartTime = startDate,
                 EndTime = startDate.AddHours(1),
-                IsCancelled = false
+                IsCancelled = false,
+                Participants = new List<EventParticipant>
+                {
+                    new EventParticipant { UserId = 1 }
+                }
             },
             new Event
             {
@@ -255,7 +273,11 @@ public class FreeSlotsServiceTests
                 Description = "Test Description 2",
                 StartTime = startDate.AddHours(1),
                 EndTime = startDate.AddHours(2),
-                IsCancelled = false
+                IsCancelled = false,
+                Participants = new List<EventParticipant>
+                {
+                    new EventParticipant { UserId = 1 }
+                }
             }
         };
 

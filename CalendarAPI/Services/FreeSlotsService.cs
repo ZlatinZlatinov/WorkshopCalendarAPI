@@ -44,7 +44,7 @@ public class FreeSlotsService
             }
 
             // Move to next slot
-            currentTime = currentTime.AddMinutes(30); // 30-minute intervals
+            currentTime = currentTime.Add(duration); // Use the specified duration instead of 30-minute intervals
         }
 
         return slots;
