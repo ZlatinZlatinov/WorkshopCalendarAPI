@@ -202,4 +202,23 @@ WorkshopCalendarAPI/
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details. 
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## GitHub Workflow
+
+This project includes a GitHub workflow that automatically builds and runs tests on commit and merge events. The workflow is defined in the `.github/workflows/test.yml` file.
+
+### Workflow Summary:
+- **Trigger:** On push to `main` and on pull requests to `main`.
+- **Environment:** Runs on the latest Ubuntu runner.
+- **Steps:**
+  1. **Checkout code:** Fetches the latest code from the repository.
+  2. **Setup .NET:** Configures the .NET environment with version 9.0.x.
+  3. **Restore dependencies:** Restores the project dependencies.
+  4. **Build:** Builds the project without restoring dependencies again.
+  5. **Test:** Runs the tests without rebuilding the project.
+
+### Next Steps:
+- Ensure that your repository has the `.github/workflows` directory.
+- Commit the `test.yml` file to your repository.
+- Push the changes to GitHub, and the workflow will automatically run on the specified events. 
