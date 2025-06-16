@@ -205,7 +205,17 @@ public class EventsController : ControllerBase
         startDate = DateTime.SpecifyKind(startDate, DateTimeKind.Utc);
         endDate = DateTime.SpecifyKind(endDate, DateTimeKind.Utc);
 
-        var freeSlots = await _freeSlotsService.FindFreeSlots(
+        // Fetch all events with participants in the given range
+        var events = await _context.Events
+            .Include(e => e.Participants)
+            .Where(e => e.Participants.Any(p => participantIds.Contains(p.UserId)) &&
+                        !e.IsCancelled &&
+                        e.StartTime < endDate &&
+                        e.EndTime > startDate)
+            .ToListAsync();
+
+        var freeSlots = _freeSlotsService.FindFreeSlots(
+            events,
             startDate,
             endDate,
             TimeSpan.FromMinutes(duration),
