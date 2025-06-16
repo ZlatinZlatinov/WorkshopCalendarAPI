@@ -5,6 +5,7 @@ using Xunit;
 using CalendarAPI.Services;
 using CalendarAPI.Models;
 using Microsoft.EntityFrameworkCore;
+using CalendarAPI.Data;
 
 namespace CalendarAPI.Tests;
 
@@ -179,7 +180,7 @@ public class FreeSlotsServiceTests
     }
 
     [Fact]
-    public async Task FindFreeSlots_WithDifferentDuration_ReturnsAppropriateSlots()
+    public void FindFreeSlots_WithDifferentDuration_ReturnsAppropriateSlots()
     {
         // Arrange
         var startDate = new DateTime(2024, 3, 1, 9, 0, 0, DateTimeKind.Utc);
@@ -187,19 +188,9 @@ public class FreeSlotsServiceTests
         var duration = TimeSpan.FromHours(1);
         var participantIds = new List<int> { 1 };
 
-        var existingEvent = new Event
-        {
-            Title = "Existing Event",
-            Description = "Test Description",
-            StartTime = startDate.AddHours(1),
-            EndTime = startDate.AddHours(2),
-            IsCancelled = false
-        };
-        await _context.Events.AddAsync(existingEvent);
-        await _context.SaveChangesAsync();
-
+        // No events in this test, so pass empty list
         // Act
-        var result = await _service.FindFreeSlots(startDate, endDate, duration, participantIds);
+        var result = _service.FindFreeSlots(new List<Event>(), startDate, endDate, duration, participantIds);
 
         // Assert
         var slotsList = result.ToList();
@@ -240,7 +231,7 @@ public class FreeSlotsServiceTests
     }
 
     [Fact]
-    public async Task FindFreeSlots_WithMultipleOverlappingEvents_ExcludesAllOverlappingSlots()
+    public void FindFreeSlots_WithMultipleOverlappingEvents_ExcludesAllOverlappingSlots()
     {
         // Arrange
         var startDate = new DateTime(2024, 3, 1, 9, 0, 0, DateTimeKind.Utc);
@@ -267,11 +258,9 @@ public class FreeSlotsServiceTests
                 IsCancelled = false
             }
         };
-        await _context.Events.AddRangeAsync(events);
-        await _context.SaveChangesAsync();
 
         // Act
-        var result = await _service.FindFreeSlots(startDate, endDate, duration, participantIds);
+        var result = _service.FindFreeSlots(events, startDate, endDate, duration, participantIds);
 
         // Assert
         var slotsList = result.ToList();

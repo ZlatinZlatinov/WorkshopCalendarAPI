@@ -323,7 +323,7 @@ public class EventsControllerTests : IDisposable
         var startDate = DateTime.UtcNow;
         var endDate = startDate.AddHours(2);
         var durationMinutes = 30;
-        var participantIds = new[] { 1 };
+        var participantIds = new List<int> { 1 };
 
         var user = new User
         {
