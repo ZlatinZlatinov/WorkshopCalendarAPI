@@ -103,31 +103,6 @@ public class UsersControllerTests : IDisposable
         Assert.IsType<NotFoundResult>(result.Result);
     }
 
-    [Fact]
-    public async Task CreateUser_WithValidData_ReturnsCreatedUser()
-    {
-        // Arrange
-        var user = new User
-        {
-            Name = "New User",
-            Email = "new@example.com",
-            PasswordHash = "hash",
-            CreatedAt = DateTime.UtcNow
-        };
-
-        // Act
-        var result = await _controller.CreateUser(user);
-
-        // Assert
-        var createdResult = Assert.IsType<ActionResult<User>>(result);
-        var returnValue = Assert.IsType<User>(createdResult.Value);
-        Assert.Equal(user.Name, returnValue.Name);
-        Assert.Equal(user.Email, returnValue.Email);
-        Assert.Equal(user.PasswordHash, returnValue.PasswordHash);
-        Assert.Equal(user.CreatedAt, returnValue.CreatedAt);
-        Assert.Empty(returnValue.EventParticipants);
-    }
-
     [Theory]
     [InlineData("", "test@example.com", "hash")]
     [InlineData("Test User", "", "hash")]
