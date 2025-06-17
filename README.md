@@ -1,6 +1,84 @@
-# Workshop Calendar API
+# Workshop Calendar API & Frontend
 
-A .NET 9 ASP.NET Core Web API for managing personal calendars with support for multiple users, event management, and finding free time slots among participants.
+A full-stack solution for managing personal calendars, events, and users, featuring:
+- **.NET 9 ASP.NET Core Web API** (backend)
+- **React + TypeScript + TailwindCSS** (frontend)
+- **SQL Server** (database)
+- **Docker Compose** for easy orchestration
+
+---
+
+## Prerequisites
+- Docker & Docker Compose
+- (Optional) .NET 9 SDK and Node.js for local development
+
+---
+
+## Running the Full Stack with Docker Compose
+
+1. **Clone the repository** and navigate to the `WorkshopCalendarAPI` directory:
+   ```sh
+   cd WorkshopCalendarAPI
+   ```
+2. **Build and start all services:**
+   ```sh
+   docker-compose up --build
+   ```
+   This will start:
+   - SQL Server database (port 1433)
+   - API backend (ports 5000, 5001)
+   - Frontend (port 3000)
+
+3. **Access the services:**
+   - **Frontend:** [http://localhost:3000](http://localhost:3000)
+   - **API (Swagger):** [http://localhost:5000/swagger](http://localhost:5000/swagger)
+   - **Database:** localhost:1433 (user: `sa`, password: `Your_strong_password123!`)
+
+---
+
+## Project Structure
+
+```
+WorkshopCalendarAPI/
+├── CalendarAPI/             # ASP.NET Core Web API
+│   └── Dockerfile           # Backend Dockerfile
+├── CalendarFrontEnd/        # React + Vite + TailwindCSS frontend
+│   └── Dockerfile           # Frontend Dockerfile
+├── docker-compose.yml       # Orchestration for API, frontend, and DB
+└── ...
+```
+
+---
+
+## API & Frontend Features
+- **User authentication (JWT)**
+- **Event CRUD and participant management**
+- **Find free time slots among users**
+- **Modern, responsive UI**
+- **Integration and unit tests**
+
+---
+
+## Local Development (Optional)
+- Backend: see `CalendarAPI/README.md` for .NET run instructions
+- Frontend:
+  ```sh
+  cd CalendarFrontEnd
+  npm install
+  npm run dev
+  ```
+  Then visit [http://localhost:5173](http://localhost:5173)
+
+---
+
+## Environment Variables
+- API connection string and environment are set in `docker-compose.yml`.
+- Change the `SA_PASSWORD` in `docker-compose.yml` for production use!
+
+---
+
+## License
+MIT — see [`LICENSE`](LICENSE) for details.
 
 ## Features
 
@@ -10,12 +88,6 @@ A .NET 9 ASP.NET Core Web API for managing personal calendars with support for m
 - Finding free time slots among multiple users
 - RESTful API design
 - Swagger/OpenAPI documentation
-
-## Prerequisites
-
-- .NET 9 SDK
-- SQL Server (local or remote)
-- Visual Studio 2022, VS Code, or JetBrains Rider
 
 ## Getting Started
 
@@ -199,10 +271,6 @@ WorkshopCalendarAPI/
 3. Commit your changes
 4. Push to the branch
 5. Create a Pull Request
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## GitHub Workflow
 
