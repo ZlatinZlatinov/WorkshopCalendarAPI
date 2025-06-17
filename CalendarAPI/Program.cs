@@ -38,6 +38,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddScoped<FreeSlotsService>();
 builder.Services.AddScoped<AuthService>();
 
+// Register MCP SDK
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -68,6 +70,8 @@ app.UseCors();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+// Enable MCP SDK middleware
 
 app.MapControllers();
 
